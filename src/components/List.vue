@@ -3,6 +3,15 @@ import { ref, onMounted } from 'vue';
 import axios from 'axios';
 
 const list = ref([])
+
+async function Update(id)
+{
+    const update = await axios.patch(`/api/Usluga/${id}`)
+    const response = await axios.get('/api/Usluga')
+    list.value = response.data
+    
+}
+
 onMounted(async() => {
     const response = await axios.get('/api/Usluga')
     list.value = response.data
@@ -22,6 +31,7 @@ onMounted(async() => {
                         <th>Цена</th>
                         <th>Дата создания</th>
                         <th>Дата редактирования</th>
+                        <th>Действие</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -33,10 +43,13 @@ onMounted(async() => {
                         <td>{{ usluga.price }}</td>
                         <td>{{ usluga.createdAt }}</td>
                         <td>{{ usluga.modifiedAt }}</td>
+                        <td>
+                            <button @click="Update(usluga.id)">Изменить статус</button>
+                            <button>Редактировать</button>
+                        </td>
                     </tr>
                 </tbody>
             </table>
-            
         </div>
     </div>
 </template>
