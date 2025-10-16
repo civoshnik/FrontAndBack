@@ -1,5 +1,6 @@
 <script setup>
 import { ref, onMounted } from 'vue';
+import VueRouter from 'vue-router'
 import axios from 'axios';
 
 const list = ref([])
