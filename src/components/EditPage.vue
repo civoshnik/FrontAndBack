@@ -1,7 +1,10 @@
 <script setup>
 import { ref, onMounted } from 'vue';
-import VueRouter from 'vue-router'
+import { useRoute } from 'vue-router'
 import axios from 'axios';
+
+const route = useRoute()
+const id = route.params.id
 
 const list = ref([])
 
@@ -12,15 +15,23 @@ const price = ref("")
 
 async function Update() {
     const fulldata = {
+        id: parseInt(id),
         name: name.value,
         type: type.value,
         price: parseFloat(price.value)
     }
-    const response = await axios.put('/api/put', fulldata)
-   name = ""
-   type = ""
-   price = "" 
+    const response = await axios.put(`/api/Usluga/${id}`, fulldata)
+   name.value = ""
+   type.value = ""
+   price.value = "" 
 }
+onMounted(async () => {
+    const response = await axios.get(`/api/Usluga/${id}`)
+    const usluga = response.data
+    name.value = usluga.name
+    type.value = usluga.type
+    price.value = usluga.price
+})
 </script>
 
 

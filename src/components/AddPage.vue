@@ -16,9 +16,9 @@ async function Post() {
     }
     const response = await axios.post('api/Usluga', fulldata)
 
-    name = ""
-    type = ""
-    price = ""
+    name.value = ""
+    type.value = ""
+    price.value = ""
 
 }
 </script>

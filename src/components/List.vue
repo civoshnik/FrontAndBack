@@ -1,7 +1,9 @@
 <script setup>
 import { ref, onMounted } from 'vue';
+import { useRouter } from 'vue-router'
 import axios from 'axios';
 
+const router = useRouter()
 const list = ref([])
 
 async function Update(id)
@@ -45,7 +47,7 @@ onMounted(async() => {
                         <td>{{ usluga.modifiedAt }}</td>
                         <td>
                             <button @click="Update(usluga.id)">Изменить статус</button>
-                            <button>Редактировать</button>
+                            <button @click="router.push(`edit/${usluga.id}`)">Редактировать</button>
                         </td>
                     </tr>
                 </tbody>

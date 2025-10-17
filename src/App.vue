@@ -1,23 +1,17 @@
 <script setup>
 import { ref } from 'vue';
-import AddPage from './components/AddPage.vue';
-import List from './components/List.vue';
+import { useRouter } from 'vue-router';
 
-const showAddPage = ref(false)
-function ShowAddPage()
-{
-  showAddPage.value = !showAddPage.value
-}
+const router = useRouter()
 </script>
 
 <template>
-  <div v-if="!showAddPage">
-  <List/>
-  <button @click="ShowAddPage" class="button-add">Перейти на страницу добавления</button>
+   <router-view />
+   <div v-if="$route.path === '/'">
+  <button @click="router.push('/add')" class="button-add">Перейти на страницу добавления</button>
   </div>
   <div v-else>
-  <AddPage/>
-  <button @click="ShowAddPage" class="button-back">Назад</button>
+  <button @click="router.back()" class="button-back">Назад</button>
   </div>
 </template>
 
