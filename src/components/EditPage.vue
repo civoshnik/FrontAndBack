@@ -1,9 +1,11 @@
 <script setup>
 import { ref, onMounted } from 'vue';
 import { useRoute } from 'vue-router'
+import { useRouter } from 'vue-router';
 import axios from 'axios';
 
 const route = useRoute()
+const router = useRouter()
 const id = route.params.id
 
 const list = ref([])
@@ -21,9 +23,10 @@ async function Update() {
         price: parseFloat(price.value)
     }
     const response = await axios.put(`/api/Usluga/${id}`, fulldata)
-   name.value = ""
-   type.value = ""
-   price.value = "" 
+    name.value = ""
+    type.value = ""
+    price.value = ""
+    router.push('/')
 }
 onMounted(async () => {
     const response = await axios.get(`/api/Usluga/${id}`)
@@ -41,7 +44,7 @@ onMounted(async () => {
     <p><input type="text" v-model="name" placeholder="Введите наименование услуги"/></p>
     <p><input type="text" v-model="type" placeholder="Введите тип услуги"/></p>
     <p><input type="text" v-model="price" placeholder="Введите цену"/></p>
-    <button @click="Update">Добавить!</button>
+    <button @click="Update">Отредактиовать!</button>
   </div>
 </template>
 
