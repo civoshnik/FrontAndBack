@@ -12,7 +12,7 @@ const id = route.params.id
 const validation = yup.object({
     name: yup.string().required('Наименование должно быть обязательным'),
     type: yup.string().required('Тип должен быть обязательным'),
-    price: yup.number().required('Цена должна быть обязательная').positive('Цена должна быть больше 0')
+    price: yup.number().required('Цена должна быть обязательная').positive('Цена должна быть больше 0').typeError('Цена должна быть числом')
 })
 
 const errors = ref({
